@@ -1,0 +1,13 @@
+{
+  "rulesDirectory": ["node_modules/tslint-microsoft-contrib"],
+  "rules": {
+    "naming-convention": [true,
+      { "type": "property", "modifiers": "protected", "leadingUnderscore": "require" },
+      { "type": "member", "modifiers": "private", "leadingUnderscore": "require" },
+      { "type": "enumMember", "format": "UPPER_CASE" }
+    ],
+    "interface-name": false,
+    "quotemark": ["single"]
+  },
+  "extends": ["./node_modules/tslint-consistent-codestyle"]
+}
