@@ -13,7 +13,8 @@
     "lint:fix": "gts fix",
     "postinstall": "npm run compile",
     "precompile": "tsc --version",
-    "start": "webpack-dev-server -d --progress --colors --port 8091 --config webpack.config.js --hot --inline --host 0.0.0.0 --content-base example",
+    "start": "webpack-dev-server -d --progress --colors --port 8091 --config webpack.config.js --no-inline --host 0.0.0.0 --content-base example",
+    "start:node": "node example/node.js",
     "tdd": "yarn test -- --watch-extensions ts --watch",
     "test": "nyc ts-mocha -p tsconfig.json test/**/*.ts",
     "watch": "tsc -w"

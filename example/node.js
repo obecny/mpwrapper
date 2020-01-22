@@ -1,6 +1,7 @@
-import * as mpWrapper from '../src/wrapper';
-// import * as mpWrapper from 'mpwrapper';
-const wrapper1 = mpWrapper.wrap(XMLHttpRequest.prototype, 'open', (original) => {
+const https = require('https');
+// const mpWrapper = require('mpwrapper');
+const mpWrapper = require('../build/src/index');
+const wrapper1 = mpWrapper.wrap(https, 'get', (original) => {
   return function () {
     console.log('before request 1');
     const result = original.apply(this, arguments);
@@ -9,7 +10,7 @@ const wrapper1 = mpWrapper.wrap(XMLHttpRequest.prototype, 'open', (original) => 
   };
 });
 
-const wrapper2 = mpWrapper.wrap(XMLHttpRequest.prototype, 'open', (original) => {
+const wrapper2 = mpWrapper.wrap(https, 'get', (original) => {
   return function () {
     console.log('before request 2');
     const result = original.apply(this, arguments);
@@ -20,14 +21,17 @@ const wrapper2 = mpWrapper.wrap(XMLHttpRequest.prototype, 'open', (original) => 
 
 function getData(callback) {
   const url = 'https://raw.githubusercontent.com/obecny/mpwrapper/master/package.json';
-  const req = new XMLHttpRequest();
-  req.open('GET', url, true);
-  req.send();
-  req.onload = function () {
-    const info = JSON.parse(req.responseText);
-    console.log(`${info.name} - ${info.version}`);
-    callback();
-  };
+  https.get(url, (response) => {
+    let data = '';
+    response.on('data', (chunk) => {
+      data += chunk;
+    });
+    response.on('end', () => {
+      const info = JSON.parse(data);
+      console.log(`${info.name} - ${info.version}`);
+      callback();
+    });
+  });
 }
 
 getData(()=> {
