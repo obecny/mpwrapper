@@ -104,6 +104,10 @@ function unwrapCallback(obj: any, name: string, result: AnyFunction) {
           break;
         }
       }
+      // no more callbacks - try to restore original function
+      if (store.callbacks.length === 0) {
+        unwrap(obj, name);
+      }
     }
   } else {
     logger('function cannot be unwrapped');

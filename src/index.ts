@@ -1,6 +1,6 @@
 declare global {
-    interface Function {
-        __mpWrapped?: boolean;
-    }
+  interface Function {
+    __mpWrapped?: boolean;
+  }
 }
 export * from './wrapper';
