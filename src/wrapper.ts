@@ -1,7 +1,6 @@
 import { AnyFunction, Store, WrapperObj } from './types';
 
 const WRAPPED = '__mpWrapped';
-const WRAPPED_SHIMMER = '__wrapped';
 
 const storeWrapper = new WeakMap<AnyFunction, Store>();
 const logger = console.error.bind(console);
@@ -37,8 +36,7 @@ export function wrap(
 export function massWrap(
   objs: any | any[],
   names: string[],
-  userWrapper: AnyFunction,
-  getUnwrap?: boolean
+  userWrapper: AnyFunction
 ): WrapperObj[] {
   const results: WrapperObj[] = [];
   if (!objs) {
@@ -168,10 +166,9 @@ function createWrapper(obj: any, name: string): AnyFunction {
     }
   }
 
-  // compatible with shimmer for any checks etc.
-  // just for testing purposes, later to be removed
   defineProperty(wrapper, WRAPPED, true);
-  defineProperty(wrapper, WRAPPED_SHIMMER, true);
+
+  extendObject(original, next);
 
   defineProperty(obj, name, wrapper);
 
@@ -206,4 +203,10 @@ function getWrapper(obj: any, name: string) {
 
 function isFunction(f: AnyFunction) {
   return typeof f === 'function';
+}
+
+function extendObject(source: any, destination: any) {
+  Object.keys(source).forEach((key: string) => {
+    destination[key] = source[key];
+  });
 }
