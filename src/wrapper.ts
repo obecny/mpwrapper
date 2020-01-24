@@ -151,20 +151,7 @@ function createWrapper(obj: any, name: string): AnyFunction {
   function next(this: any, ...args: any[]): any {
     i++;
     if (callbacks.length >= i) {
-      let result = undefined;
-      let error = false;
-      try {
-        result = callbacks[i - 1].apply(this, args);
-      } catch (e) {
-        error = true;
-        throw e;
-      } finally {
-        if (error) {
-          // continue the loop
-          return next();
-        }
-        return result;
-      }
+      return callbacks[i - 1].apply(this, args);
     } else {
       return original.apply(this, args);
     }
