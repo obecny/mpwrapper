@@ -15,6 +15,7 @@
     "prepare": "npm run compile",
     "start": "webpack-dev-server -d --progress --colors --port 8091 --config webpack.config.js --no-inline --host 0.0.0.0 --content-base example",
     "start:node": "node example/node.js",
+    "start:shimmer": "node example/shimmer.js",
     "tdd": "yarn test -- --watch-extensions ts --watch",
     "test": "nyc ts-mocha -p tsconfig.json test/**/*.ts",
     "watch": "tsc -w"
@@ -49,6 +50,7 @@
     "mocha": "^7.0.0",
     "nyc": "^15.0.0",
     "rimraf": "^3.0.0",
+    "shimmer": "^1.2.1",
     "ts-loader": "^6.2.1",
     "ts-mocha": "^6.0.0",
     "ts-node": "^8.6.2",

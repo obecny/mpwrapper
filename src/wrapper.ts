@@ -28,7 +28,7 @@ export function wrap(
     }
   }
   return {
-    unwrap: unwrapCallback.bind(undefined, obj, name, result),
+    unwrap: unwrapCallback.bind(undefined, wrapper, obj, name, result),
     wrapped: result,
   };
 }
@@ -93,8 +93,12 @@ export function massUnwrap(objs: any | any[], names: string[]) {
   });
 }
 
-function unwrapCallback(obj: any, name: string, result: AnyFunction) {
-  const wrapper = obj[name];
+function unwrapCallback(
+  wrapper: any,
+  obj: any,
+  name: string,
+  result: AnyFunction
+) {
   if (typeof result === 'function' && wrapper[WRAPPED]) {
     const store = storeWrapper.get(wrapper);
     if (store) {
@@ -105,7 +109,7 @@ function unwrapCallback(obj: any, name: string, result: AnyFunction) {
         }
       }
       // no more callbacks - try to restore original function
-      if (store.callbacks.length === 0) {
+      if (store.callbacks.length === 0 && wrapper === obj[name]) {
         unwrap(obj, name);
       }
     }
@@ -197,7 +201,8 @@ function isFunction(f: AnyFunction) {
 }
 
 function extendObject(source: any, destination: any) {
-  Object.keys(source).forEach((key: string) => {
-    destination[key] = source[key];
-  });
+  Object.assign(source, destination);
+  // Object.keys(source).forEach((key: string) => {
+  //   destination[key] = source[key];
+  // });
 }
