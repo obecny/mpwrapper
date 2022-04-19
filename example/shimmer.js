@@ -6,7 +6,7 @@ function theOriginal(a, b) {
 }
 
 const obj = {
-  theOriginal
+  theOriginal,
 };
 
 const mpWrapper1 = mpWrapper.wrap(obj, 'theOriginal', (orig) => {
