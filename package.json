@@ -13,7 +13,7 @@
     "lint:fix": "gts fix",
     "precompile": "tsc --version",
     "prepare": "npm run compile",
-    "start": "webpack-dev-server -d --progress --colors --port 8091 --config webpack.config.js --no-inline --host 0.0.0.0 --content-base example",
+    "start": "webpack serve --progress --color --port 8091 --config webpack.config.js --hot --host 0.0.0.0 --compress",
     "start:node": "node example/node.js",
     "start:shimmer": "node example/shimmer.js",
     "tdd": "yarn test -- --watch-extensions ts --watch",
@@ -28,7 +28,7 @@
   "author": "Bartlomiej Obecny",
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=10.0.0"
   },
   "files": [
     "build/src/**/*.js",
@@ -41,25 +41,25 @@
     "access": "public"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.3",
-    "@types/mocha": "^5.2.7",
-    "@types/node": "^13.1.7",
-    "babel-loader": "^8.0.6",
-    "codecov": "^3.6.1",
-    "gts": "^1.1.2",
-    "mocha": "^7.0.0",
-    "nyc": "^15.0.0",
-    "rimraf": "^3.0.0",
+    "@babel/core": "^7.17.9",
+    "@types/node": "^17.0.25",
+    "@typescript-eslint/eslint-plugin": "^5.20.0",
+    "@typescript-eslint/parser": "^5.20.0",
+    "babel-loader": "^8.2.4",
+    "codecov": "^3.8.3",
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.2.0",
+    "gts": "^3.1.0",
     "shimmer": "^1.2.1",
-    "ts-loader": "^6.2.1",
-    "ts-mocha": "^6.0.0",
-    "ts-node": "^8.6.2",
-    "tslint-consistent-codestyle": "^1.16.0",
-    "tslint-microsoft-contrib": "^6.2.0",
-    "typescript": "^3.7.5",
-    "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.10.1",
-    "webpack-merge": "^4.2.2"
+    "ts-loader": "^9.2.8",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.8.1",
+    "webpack-merge": "^5.8.0"
   }
 }

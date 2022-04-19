@@ -30,11 +30,11 @@ function getData(callback) {
   };
 }
 
-getData(()=> {
+getData(() => {
   wrapper1.unwrap();
-  getData(()=> {
+  getData(() => {
     wrapper2.unwrap();
-    getData(()=> {
+    getData(() => {
       console.log('done');
     });
   });
